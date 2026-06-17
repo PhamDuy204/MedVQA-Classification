@@ -1,0 +1,42 @@
+dataset_name: flaviagiammarino/vqa-rad
+model_name: flaviagiammarino/pubmed-clip-vit-base-patch32
+model_type: pubmedclip_ban
+
+output_dir: runs/vqa_rad_pubmedclip_ban
+seed: 42
+
+epochs: 40
+batch_size: 16
+eval_batch_size: 64
+num_workers: 2
+max_length: 77
+
+num_hid: 512
+glimpse: 4
+freeze_clip: true
+
+lr_head: 0.0001
+lr_clip: 0.000001
+weight_decay: 0.0001
+warmup_ratio: 0.05
+type_loss_weight: 0.2
+class_weight_power: 0.5
+mixed_precision: fp16
+grad_clip: 1.0
+
+min_answer_freq: 1
+max_answers: null
+
+# train_eval: giống nhiều repo/paper nhỏ, dùng train+eval để cố định label space.
+# train: strict protocol, chỉ dùng answer trong train làm label space.
+answer_vocab_source: train_eval
+
+# Không bật khi so paper vì làm denominator thay đổi.
+filter_eval_unseen_train_answers: false
+
+# false: giữ sample count-question invalid và chỉ log ratio.
+# true: xóa sample có question hỏi số lượng nhưng answer không phải số.
+filter_invalid_count_answers: false
+count_answer_max_num: null
+
+eval_with_type_mask: true
