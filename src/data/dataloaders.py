@@ -87,7 +87,7 @@ def make_loaders(cfg: TrainConfig, processor: CLIPProcessor):
     )  if eval_split is not None else None
 
     test_loader = DataLoader(
-        test_split,
+        test_set,
         batch_size=cfg.eval_batch_size,
         shuffle=False,
         collate_fn=collate_fn,
