@@ -12,7 +12,8 @@ from utils.counting import (
     is_valid_count_answer,
 )
 from utils.text import clean_question, normalize_answer
-
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 class MedVQADataset(Dataset):
     """
@@ -83,6 +84,7 @@ class MedVQADataset(Dataset):
         invalid_count_answer = count_question and not valid_count_answer
 
         return {
+            "idx":torch.tensor(idx, dtype=torch.long),
             "image": image,
             "question": question,
             "answer": answer,

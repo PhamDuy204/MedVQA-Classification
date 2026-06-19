@@ -19,6 +19,7 @@ def make_collate_fn(processor: CLIPProcessor, max_length: int = 77):
             truncation=True,
             max_length=max_length,
         )
+        enc["idx"] = torch.stack([x["idx"] for x in batch])
         enc["labels"] = torch.stack([x["label"] for x in batch])
         enc["answer_type"] = torch.stack([x["answer_type"] for x in batch])
         enc["is_unseen_answer"] = torch.stack([x["is_unseen_answer"] for x in batch])
